@@ -3,7 +3,7 @@ import StarRating from "./StarRating";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
 import { useKey } from "./useKey";
-// import ReactTmdbImage from "react-tmdb-image";
+//import ReactTmdbImage from "react-tmdb-image";
 // const tempMovieData = [
 //   {
 //     imdbID: "tt1375666",
@@ -55,6 +55,7 @@ const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 const KEY = "d23ab74305c85767888d49cab240abaf";
+
 // const KEY = "efdd89cc";
 export default function App() {
   const [query, setQuery] = useState("");
@@ -263,72 +264,6 @@ function Box({ children }) {
   );
 }
 
-/*
-function WatchedBox() {
-  const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "–" : "+"}
-      </button>
-
-      {isOpen2 && (
-        <>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
-        </>
-      )}
-    </div>
-  );
-}
-*/
-
-// function MovieList({ movies, onSelectMovie }) {
-//   return (
-//     <ul className="list list-movies">
-//       {movies?.map((movie) => (
-//         <Movie movie={movie} key={movie.imdbID} onSelectMovie={onSelectMovie} />
-//       ))}
-//     </ul>
-//   );
-// }
-// function MovieList({ movies, onSelectMovie }) {
-//   return (
-//     <ul className="list list-movies">
-//       {movies?.map((movie) => (
-//         <Movie key={movie.id} movie={movie} onSelectMovie={onSelectMovie} />
-//       ))}
-//     </ul>
-//   );
-// }
-// function MovieList({ movies, onSelectMovie }) {
-//   return (
-//     <ul className="list list-movies">
-//       {movies?.map((movie, imdbID) => (
-//         <Movie
-//           movie={movie}
-//           key={`${movie.imdbID}-${imdbID}`}
-//           onSelectMovie={onSelectMovie}
-//         />
-//       ))}
-//     </ul>
-//   );
-// }
-// function MovieList({ movies, onSelectMovie }) {
-//   return (
-//     <ul className="list list-movies">
-//       {movies?.map((movie) => (
-//         <Movie movie={movie} key={movie.id} onSelectMovie={onSelectMovie} />
-//         // <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
-//       ))}
-//     </ul>
-//   );
-// }
 function MovieList({ movies, onSelectMovie }) {
   return (
     <ul className="list list-movies">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 const KEY = "d23ab74305c85767888d49cab240abaf";
 
@@ -7,13 +7,14 @@ export function useMovies(query) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const controller = useMemo(() => new AbortController(), []);
-
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
+
         if (query.length < 3) {
           // Reset the movies and error state when the query is too short
           setMovies([]);
@@ -55,7 +56,7 @@ export function useMovies(query) {
     return function () {
       controller.abort();
     };
-  }, [query, controller]);
+  }, [query]);
 
   return { movies, isLoading, error };
 }
