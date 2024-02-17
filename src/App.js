@@ -264,15 +264,30 @@ function Box({ children }) {
   );
 }
 
+// function MovieList({ movies, onSelectMovie }) {
+//   return (
+//     <ul className="list list-movies">
+//       {movies?.map((movie) => (
+//         <Movie
+//           movie={movie}
+//           key={movie.id}
+//           onSelectMovie={() => {
+//             onSelectMovie(movie.id);
+//           }}
+//         />
+//       ))}
+//     </ul>
+//   );
+// }
 function MovieList({ movies, onSelectMovie }) {
   return (
     <ul className="list list-movies">
-      {movies?.map((movie) => (
-        <Movie
-          movie={movie}
-          key={movie.id}
-          onSelectMovie={() => {
-            onSelectMovie(movie.id);
+      {movies?.map((media) => (
+        <Media
+          media={media}
+          key={media.id}
+          onSelectMedia={() => {
+            onSelectMovie(media.id, media.media_type);
           }}
         />
       ))}
@@ -280,28 +295,51 @@ function MovieList({ movies, onSelectMovie }) {
   );
 }
 
-function Movie({ movie, onSelectMovie }) {
-  if (!movie || !movie.title) {
+function Media({ media, onSelectMedia }) {
+  if (!media || !media.title) {
     return null; // Or some loading indicator
   }
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+
+  const posterUrl = media.poster_path
+    ? `https://image.tmdb.org/t/p/w500${media.poster_path}`
     : "";
-  // const posterUrl = poster ? `https://image.tmdb.org/t/p/w500${poster}` : ""; // Use the correct base URL for movie posters
 
   return (
-    <li key={movie.id} onClick={() => onSelectMovie(movie.id)}>
-      <img src={posterUrl} alt={`${movie.title} poster`} />
-      <h3>{movie.title}</h3>
+    <li key={media.id} onClick={onSelectMedia}>
+      <img src={posterUrl} alt={`${media.title} poster`} />
+      <h3>{media.title || media.name}</h3>
       <div>
         <p>
           <span>🗓</span>
-          <span>{movie.release_date.substring(0, 4)}</span>
+          <span>{media.release_date?.substring(0, 4) || ""}</span>
         </p>
       </div>
     </li>
   );
 }
+
+// function Movie({ movie, onSelectMovie }) {
+//   if (!movie || !movie.title) {
+//     return null; // Or some loading indicator
+//   }
+//   const posterUrl = movie.poster_path
+//     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+//     : "";
+//   // const posterUrl = poster ? `https://image.tmdb.org/t/p/w500${poster}` : ""; // Use the correct base URL for movie posters
+
+//   return (
+//     <li key={movie.id} onClick={() => onSelectMovie(movie.id)}>
+//       <img src={posterUrl} alt={`${movie.title} poster`} />
+//       <h3>{movie.title}</h3>
+//       <div>
+//         <p>
+//           <span>🗓</span>
+//           <span>{movie.release_date.substring(0, 4)}</span>
+//         </p>
+//       </div>
+//     </li>
+//   );
+// }
 
 function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
