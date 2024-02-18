@@ -19,7 +19,7 @@ export function useMovies(query) {
           setMovies([]);
         } else {
           const res = await fetch(
-            `https://api.themoviedb.org/3/search/multi?api_key=${KEY}&query=${query}&media_type=movie,tv`,
+            `https://api.themoviedb.org/3/search/multi?api_key=${KEY}&query=${query}`,
             { signal: controller.signal }
           );
 
@@ -28,8 +28,10 @@ export function useMovies(query) {
           }
 
           const data = await res.json();
+          console.log("API Response:", data.results); // Log the API response
+
           if (data.results.length === 0) {
-            throw new Error("Movie or TV series not found");
+            throw new Error("Movie not found");
           }
 
           setMovies(data.results);
@@ -78,7 +80,7 @@ export function useMovies(query) {
 //           setMovies([]);
 //         } else {
 //           const res = await fetch(
-//             `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&query=${query}`,
+//             `https://api.themoviedb.org/3/search/multi?api_key=${KEY}&query=${query}`,
 //             { signal: controller.signal }
 //           );
 
